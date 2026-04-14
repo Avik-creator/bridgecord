@@ -2,7 +2,7 @@
 
 **Live chat that lives in Discord.** A lightweight, embeddable chat widget that connects your website visitors directly to your Discord server. Your team replies from Discord -- visitors get real-time responses on your site.
 
-> [https://bridgecord.avikmukherjee.me](https://bridgecord.avikmukherjee.me)
+> [https://bridgecord.avikmukherjee.com](https://bridgecord.avikmukherjee.com)
 
 ---
 
@@ -168,7 +168,7 @@ After creating a project and connecting Discord, go to the **Install** tab in yo
 
 ```html
 <iframe
-  src="https://bridgecord.avikmukherjee.me/widget/YOUR_PROJECT_ID"
+  src="https://bridgecord.avikmukherjee.com/widget/YOUR_PROJECT_ID"
   style="position:fixed;bottom:20px;right:20px;width:400px;height:600px;border:none;z-index:9999;"
 ></iframe>
 ```

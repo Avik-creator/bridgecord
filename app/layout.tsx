@@ -7,7 +7,7 @@ import './globals.css'
 
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-sans' })
 
-const siteUrl = 'https://bridgecord.avikmukherjee.me'
+const siteUrl = 'https://bridgecord.avikmukherjee.com'
 
 export const metadata: Metadata = {
   title: {

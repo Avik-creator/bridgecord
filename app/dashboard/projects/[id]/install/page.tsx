@@ -58,7 +58,7 @@ export default function InstallPage() {
   const { id } = useParams<{ id: string }>()
 
   const appUrl =
-    typeof window !== "undefined" ? window.location.origin : "https://bridgecord.avikmukherjee.me"
+    typeof window !== "undefined" ? window.location.origin : "https://bridgecord.avikmukherjee.com"
 
   // ---- Code snippets for each framework ---- //
 
