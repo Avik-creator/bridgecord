@@ -1,6 +1,6 @@
 # Bridgecord
 
-**Live chat that lives in Discord.** A lightweight, embeddable chat widget that connects your website visitors directly to your Discord server. Your team replies from Discord -- visitors get real-time responses on your site.
+**Live chat that lives in your team chat.** A lightweight, embeddable chat widget that connects your website visitors directly to your Discord server or Slack workspace. Your team replies where they already work -- visitors get real-time responses on your site. Optional AI auto-reply answers from your own site content first.
 
 > [https://bridgecord.avikmukherjee.com](https://bridgecord.avikmukherjee.com)
 
@@ -9,10 +9,11 @@
 ## How It Works
 
 1. **Create a project** in the Bridgecord dashboard.
-2. **Connect your Discord server** and pick a channel for incoming chats.
+2. **Connect Discord or Slack** and pick a channel for incoming chats.
 3. **Embed the widget** on your site with a single `<script>` tag.
-4. When a visitor starts a chat, Bridgecord creates a **Discord thread** in your chosen channel.
+4. When a visitor starts a chat, Bridgecord opens a **thread** in your chosen channel.
 5. Your team replies in the thread -- the visitor sees it instantly on the website.
+6. **Optionally**, crawl your site once and let AI answer first, handing off to a human when it cannot.
 
 ---
 
@@ -61,13 +62,15 @@ flowchart LR
 
 ## Features
 
-- **Discord-native support** -- reply to customers without leaving Discord.
-- **Thread-per-conversation** -- each visitor chat maps to a Discord thread so nothing gets lost.
+- **Discord and Slack** -- reply to customers without leaving the tool your team already lives in. Connect either, per project.
+- **Thread-per-conversation** -- each visitor chat maps to a thread so nothing gets lost.
+- **AI auto-reply** -- off by default. When enabled, Bridgecord answers from your own site content before a human is pulled in, with a configurable system prompt and model.
+- **Site crawler** -- crawls your domain once (sitemap and `robots.txt` aware) and embeds the pages, so AI answers cite what your site actually says rather than guessing.
 - **Customisable widget** -- change brand colour, position, welcome message, and more from the dashboard. Includes a live preview.
 - **Embeddable** -- single `<iframe>` or `<script>` snippet; works on any website.
 - **Conversation inbox** -- view and manage all visitor conversations in the dashboard.
 - **Discord OAuth login** -- sign in with your Discord account.
-- **Webhook relay** -- Discord bot pushes agent replies back to the widget in real time.
+- **Webhook relay** -- the Discord bot or Slack app pushes agent replies back to the widget in real time, with Slack request signatures verified.
 
 ---
 
@@ -82,6 +85,9 @@ flowchart LR
 | ORM | [Drizzle ORM](https://orm.drizzle.team) |
 | Auth | [Better Auth](https://www.better-auth.com) (Discord OAuth) |
 | Discord API | REST v10 (bot invite, threads, messages) |
+| Slack API | OAuth install, `conversations.*`, signed webhooks |
+| AI | [AI SDK](https://sdk.vercel.ai) with [Groq](https://groq.com) (default `llama-3.3-70b-versatile`) |
+| Vector store | [Upstash Vector](https://upstash.com/docs/vector) for crawled site content |
 | Deployment | [Vercel](https://vercel.com) |
 
 ---
