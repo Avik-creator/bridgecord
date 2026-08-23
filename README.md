@@ -16,6 +16,49 @@
 
 ---
 
+## Architecture
+
+```mermaid
+flowchart LR
+    V["Website visitor<br/>embedded widget iframe"]
+    OWNER["Project owner<br/>dashboard"]
+
+    subgraph APP["Next.js 16 App Router"]
+        WAPI["/api/widget/[projectId]<br/>config, conversations, messages, stream"]
+        DASH["/dashboard<br/>inbox, widget config, live preview"]
+        DHOOK["/api/discord/webhook"]
+        SHOOK["/api/slack/webhook"]
+        CRAWL["/api/projects/[id]/crawl"]
+    end
+
+    AI["lib/ai-reply<br/>Groq — only when aiEnabled"]
+    CR["lib/crawler<br/>sitemap + robots aware"]
+    VEC[("Upstash Vector<br/>site memories")]
+    PG[("PostgreSQL / Neon<br/>projects, conversations, messages,<br/>widget / discord / slack configs")]
+    DIS["Discord<br/>one thread per conversation"]
+    SLK["Slack"]
+
+    V --> WAPI
+    OWNER --> DASH
+    DASH --> PG
+    WAPI --> PG
+    WAPI -->|create thread, relay message| DIS
+    WAPI -->|relay message| SLK
+    WAPI -.->|if aiEnabled| AI
+    AI -->|retrieve site context| VEC
+    AI --> PG
+    DIS -->|agent reply| DHOOK
+    SLK -->|agent reply| SHOOK
+    DHOOK --> PG
+    SHOOK --> PG
+    WAPI -.->|SSE stream| V
+    OWNER --> CRAWL
+    CRAWL --> CR
+    CR -->|embed pages| VEC
+```
+
+---
+
 ## Features
 
 - **Discord-native support** -- reply to customers without leaving Discord.
